@@ -1,6 +1,4 @@
-package finalProject;
-
-import java.lang.*;
+import java.lang.String;
 
 public class Student {
     private int id;
