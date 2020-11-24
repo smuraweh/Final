@@ -1,7 +1,7 @@
 import java.lang.String;
 
 public class Student {
-    private int id;
+    private double id;
     private String firstName;
     private String lastName;
     private String program;
@@ -19,7 +19,7 @@ public class Student {
     }
 
     // mutators
-    public void setID(int num) {
+    public void setID(double num) {
         this.id = num;
     }
 
@@ -44,7 +44,7 @@ public class Student {
     }
 
     // accessors
-    public int getID() {
+    public double getID() {
         return id;
     }
 
