@@ -1,7 +1,7 @@
 import java.lang.String;
 
 public class Student {
-    private double id;
+    private String id;
     private String firstName;
     private String lastName;
     private String program;
@@ -10,7 +10,7 @@ public class Student {
     private Node attendance; // need to write accessor and mutator functions, or may make public
 
     public Student(){ // constructor
-        id = 0;
+        id = null;
         firstName = null;
         lastName = null;
         program = null;
@@ -19,7 +19,7 @@ public class Student {
     }
 
     // mutators
-    public void setID(double num) {
+    public void setID(String num) {
         this.id = num;
     }
 
@@ -44,7 +44,7 @@ public class Student {
     }
 
     // accessors
-    public double getID() {
+    public String getID() {
         return id;
     }
 
