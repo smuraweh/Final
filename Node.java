@@ -1,5 +1,5 @@
 public class Node {
-    public double attendanceDate;
+    public string attendanceDate;
     public double attendanceAmount;
     public Node next;
 }

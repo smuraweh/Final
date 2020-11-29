@@ -1,24 +1,27 @@
 import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.event.*;
+
 
 //implement TableModelListener
-public class Frame extends JFrame {
+public class Frame extends JFrame implements MenuListener, ActionListener{
+
+    private JMenuBar menuBar = new JMenuBar();
+    private JMenu about = new JMenu("About");
+    private JMenu file = new JMenu("File");
+    private JMenuItem load = new JMenuItem("Load a Roster");
+    private JMenuItem add_att = new JMenuItem("Add Attendance");
+    private JMenuItem save = new JMenuItem("Save");
+    private JMenuItem plot = new JMenuItem("Plot Data");
 
     JFrame window;
 
     Frame() {
-        JMenuBar menuBar;
-        JMenu about;
-        JMenu file;
-        JMenuItem load;
-        JMenuItem add_att;
-        JMenuItem save;
-        JMenuItem plot;
-
-        window = new JFrame("Attendance");
+        window = new JFrame("CSE360 Final Project");
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        //Student studentArray[] = loadRoster();
+        //Student studentArray[] = roster.loadRoster();
         //String fileContents[studentArray.length][];
 
         //for(int i = 0; i < studentArray.length, i++)
@@ -37,31 +40,63 @@ public class Frame extends JFrame {
         pane.setLayout(new BorderLayout());
         pane.add(scroll, BorderLayout.CENTER);
 
-        menuBar = new JMenuBar();
-        about = new JMenu("About");
-        file = new JMenu("File");
+        about.addMenuListener(this);
+        load.addActionListener(this);
+        add_att.addActionListener(this);
+        save.addActionListener(this);
+        plot.addActionListener(this);
+
         menuBar.add(file);
         menuBar.add(about);
-
-        load = new JMenuItem("Load a Roster");
-        add_att = new JMenuItem("Add Attendance");
-        save = new JMenuItem("Save");
-        plot = new JMenuItem("Plot Data");
 
         file.add(load);
         file.add(add_att);
         file.add(save);
         file.add(plot);
 
-        pane.add(menuBar, BorderLayout.NORTH);
-
         window.add(pane);
+        window.setJMenuBar(menuBar);
         window.setSize(500, 400);
         window.setVisible(true);
+
+        //JFrame tempFrame = new JFrame("About");
+        //JOptionPane about_message = new JOptionPane("Project Contributors:\nSamia Muraweh,\nZack Sanchez,\nJacob Sumner");
+        //about_message.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //tempFrame.add(about_message);
+        //tempFrame.setSize(150, 150);
+        //about_message.setVisible(true);
     }
 
     public static void main(String[] args){
         new Frame();
+    }
+
+    public void actionPerformed(ActionEvent e){
+        if(e.getSource() == load){
+
+        }
+        else if(e.getSource() == add_att) {
+
+        }
+        else if(e.getSource() == save) {
+
+        }
+        else if(e.getSource() == plot) {
+
+        }
+    }
+
+    public void menuSelected (MenuEvent e) {
+        if(e.getSource() == about)
+            JOptionPane.showMessageDialog(null, "Project Contributors:\nSamia Muraweh,\nZack Sanchez,\nJacob Sumner");
+    }
+
+    public void menuDeselected (MenuEvent e) {
+
+    }
+
+    public void menuCanceled (MenuEvent e) {
+
     }
 
     //implemented from example
@@ -73,7 +108,4 @@ public class Frame extends JFrame {
         Object data = m.getValueAt(row, column); //input specific numbers
     }*/
 
-    //public string[] loadRoster() {
-        // implementation
-    //}
 }
