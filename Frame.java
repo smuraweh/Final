@@ -14,29 +14,22 @@ public class Frame extends JFrame implements MenuListener, ActionListener{
     private JMenuItem add_att = new JMenuItem("Add Attendance");
     private JMenuItem save = new JMenuItem("Save");
     private JMenuItem plot = new JMenuItem("Plot Data");
+    private JPanel pane = new JPanel();
+    //private Student studentArray[] = new studentArray[0];
+    private JScrollPane scroll;
+    //private Load loadObject = new Load();
 
     JFrame window;
+    JTable table;
 
     Frame() {
         window = new JFrame("CSE360 Final Project");
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        //Student studentArray[] = roster.loadRoster();
-        //String fileContents[studentArray.length][];
-
-        //for(int i = 0; i < studentArray.length, i++)
-        //fileContents[i] = {studentArray[i].getID(), studentArray[i].getFirst(), studentArray[i].getLast(), studentArray[i].getProg(), studentArray[i].getLevel(), studentArray[i].getASUrite};
-
-        //sample data for testing purposes
-        String fileContents[][] = {{"1214289933", "Samia", "Muraweh", "Computer Science", "Junior", "smuraweh"}, {"Test", "Test", "Test", "Test", "Test", "Test"}};
-        String column[] = {"ID", "First Name", "Last Name", "Program", "Level", "ASUrite"};
-        JTable table = new JTable(fileContents, column);
-        table.setBounds(30, 40, 200, 300);
         //table.getModel().addTableModelListener(this);
 
-        JScrollPane scroll = new JScrollPane(table);
+        createTable();
 
-        JPanel pane = new JPanel();
         pane.setLayout(new BorderLayout());
         pane.add(scroll, BorderLayout.CENTER);
 
@@ -67,13 +60,32 @@ public class Frame extends JFrame implements MenuListener, ActionListener{
         //about_message.setVisible(true);
     }
 
+    public void createTable(){
+        //studentArray[] = loadObject.loadRoster();
+        //String fileContents[studentArray.length][];
+
+        //for(int i = 0; i < studentArray.length, i++)
+        //fileContents[i] = {studentArray[i].getID(), studentArray[i].getFirst(), studentArray[i].getLast(), studentArray[i].getProg(), studentArray[i].getLevel(), studentArray[i].getASUrite};
+
+        //sample data for testing purposes
+        String fileContents[][] = {{"1214289933", "Samia", "Muraweh", "Computer Science", "Junior", "smuraweh"}, {"Test", "Test", "Test", "Test", "Test", "Test"}};
+        String column[] = {"ID", "First Name", "Last Name", "Program", "Level", "ASUrite"};
+        table = new JTable(fileContents, column);
+        table.setBounds(30, 40, 200, 300);
+        scroll = new JScrollPane(table);
+
+        pane.setLayout(new BorderLayout());
+        pane.add(scroll, BorderLayout.CENTER);
+    }
+
     public static void main(String[] args){
         new Frame();
     }
 
     public void actionPerformed(ActionEvent e){
         if(e.getSource() == load){
-
+            //studentArray[] = loadObject.loadRoster();
+            createTable();
         }
         else if(e.getSource() == add_att) {
 
