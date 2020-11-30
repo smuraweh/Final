@@ -1,9 +1,18 @@
 import java.io.*;
+import java.util.*;
 
 public class save {
 	
 	private String filename;
 	private FileWriter fstream;
+	Student student = new Student();
+	String id;
+	String min;
+	String firstName;
+	String program;
+	String lastName;
+	String username;
+	String level;
 	/**
 	 * This method prints the information into a csv file using the information given by the main class.
 	 * 
@@ -20,8 +29,9 @@ public class save {
 	 * @param username
 	 * @param minutes
 	 */
-	void writeFile(String namedFile, double idNum, String firstName, String lastName, String level, String program, String username, int minutes)
+	void writeFile(String namedFile, LinkedList<Student> studentList)
 	{
+		
 		try
 		{
 			filename = namedFile;
@@ -30,23 +40,30 @@ public class save {
 			/*
 			 *  idNum and minutes need to be converted to Strings first so I could write them out
 			 */
-			
-			String id = String.valueOf(idNum);
-			String min = String.valueOf(minutes);
-			fstream.write(id); 
-			fstream.write(",");
-			fstream.write(firstName);
-			fstream.write(",");
-			fstream.write(lastName);
-			fstream.write(",");
-			fstream.write(program);
-			fstream.write(",");
-			fstream.write(level);
-			fstream.write(",");
-			fstream.write(username);
-			fstream.write(",");
-			fstream.write(min);
-			fstream.write(System.lineSeparator());
+			for(int i = 0; i < studentList.size(); i++)
+		    {
+				min = String.valueOf(studentList.get); //No attendance accessor set up
+				firstName = student.getFirst();
+				lastName = student.getLast();
+				program = student.getProg();
+				level = student.getLevel();
+				id = student.getID();
+				username = student.getASUrite();
+				fstream.write(id); 
+				fstream.write(",");
+				fstream.write(firstName);
+				fstream.write(",");
+				fstream.write(lastName);
+				fstream.write(",");
+				fstream.write(program);
+				fstream.write(",");
+				fstream.write(level);
+				fstream.write(",");
+				fstream.write(username);
+				fstream.write(",");
+				fstream.write(min);
+				fstream.write(System.lineSeparator());
+		    }
 		}
 		
 		catch (IOException e) {
