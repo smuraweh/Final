@@ -2,38 +2,66 @@ import java.awt.*;
 import java.util.LinkedList;
 
 import javax.swing.*;
-import org.jfree.*;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.XYPlot;
+import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
-public class Plot {
-
-	void draw(Graphics g, LinkedList<Student> studentList)
+public class Plot extends JFrame {
+	
+	Student student = new Student();
+	
+	public Plot(LinkedList<Student> studentList)
+	{	
+		JPanel chartPanel = giveGraphInformation(studentList);
+		//JFrame frame = new JFrame();
+        this.add(chartPanel, BorderLayout.CENTER);
+        this.setSize(1920, 1080);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+	
+	public void display(LinkedList<Student> studentList)
 	{
-		int size = studentList.size;
-		XYSeries series1 = new XYSeries("series1");
-		XYSeries series2 = new XYSeries("series2");
-		
-		for(double i = 0; i < size; i++) {
-			series1.add(i, studentList.get()); // No accessor for minutes yet
-			series2.add(i,studentList.getFirst());
-		}
-		
-		XYSeriesCollection dataset1 = new XYSeriesCollection();
-	    dataset1.addSeries(series1);
-	    
-	    XYPlot plot = new XYPlot();
-	    plot.setDataset(0, dataset1);
-	    
-	    plot.setDomainAxis(new NumberAxis("series1"));
-	    plot.mapDatasetToRangeAxis(0, 100);
-	    
-	    JFreeChart chart = new JFreeChart(plot);
-	    chart.setBackgroundPaint(Color.WHITE);
-	    JPanel chartPanel = new ChartPanel(chart);
+		new Plot(studentList).setVisible(true);
+	}
+	
+	private JPanel giveGraphInformation(LinkedList<Student> studentList) {
+	    String chartTitle = "Attendance";
+	    String xAxisLabel = "ID Number";
+	    String yAxisLabel = "Minutes Attended";
+	 
+	    XYDataset dataset = giveData(studentList);
+	 
+	    JFreeChart chart = ChartFactory.createScatterPlot(chartTitle, xAxisLabel, yAxisLabel, dataset);
+	 
+	    return new ChartPanel(chart);
+	}
+	
+	private XYDataset giveData(LinkedList<Student> studentList) {
+		 XYSeriesCollection dataset = new XYSeriesCollection();
+		    XYSeries series1 = new XYSeries("Attendance 1");
+		 
+		    /*series1.add(1.0, 2.0);
+		    series1.add(2.0, 3.0);
+		    series1.add(3.0, 2.5);
+		    series1.add(3.5, 2.8);
+		    series1.add(4.2, 6.0);*/
+		    
+		    for(int i = 0; i < studentList.size(); i++)
+		    {
+		    	double idNum = Double.parseDouble(studentList.get(i).getID());
+		    	double minutes = Double.parseDouble(studentList.get(i).get()); // For attendance
+		    	series1.add(idNum, minutes);
+		    }
+		 
+		    dataset.addSeries(series1);
+		 
+		    return dataset;
 	}
 }
