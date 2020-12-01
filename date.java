@@ -1,4 +1,4 @@
-package stuff;
+
 public class date extends javax.swing.JFrame {
 
 
