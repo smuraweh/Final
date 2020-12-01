@@ -16,6 +16,7 @@ import org.jfree.data.xy.XYSeriesCollection;
 public class Plot extends JFrame {
 	
 	Student student = new Student();
+	Add attendance = new Add();
 	
 	public Plot(LinkedList<Student> studentList)
 	{	
@@ -39,7 +40,7 @@ public class Plot extends JFrame {
 	    for(int i = 0; i < studentList.size(); i++)
 	    {
 	    	double idNum = Double.parseDouble(studentList.get(i).getID());
-	    	double minutes = Double.parseDouble(studentList.get(i).get()); // For attendance
+	    	double minutes = Double.parseDouble(attendance); // For attendance
 	    	series1.add(idNum, minutes);
 	    }
 		 
