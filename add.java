@@ -132,7 +132,7 @@ public class Add {
 				 q++;
 				 if(i >0)
 				 {
-					 g = g - 10;
+					 g = g - TIME.get(0);
 					 newTIME.set(i, g);
 				 }
 				 
