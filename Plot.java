@@ -19,7 +19,33 @@ public class Plot extends JFrame {
 	
 	public Plot(LinkedList<Student> studentList)
 	{	
-		JPanel chartPanel = giveGraphInformation(studentList);
+		String chartTitle = "Attendance";
+	    String xAxisLabel = "ID Number";
+	    String yAxisLabel = "Minutes Attended";
+	    
+	    XYSeriesCollection data = new XYSeriesCollection();
+	    XYSeries series1 = new XYSeries("Attendance 1");
+	 
+	    /*series1.add(1.0, 2.0);
+	    series1.add(2.0, 3.0);
+	    series1.add(3.0, 2.5);
+	    series1.add(3.5, 2.8);
+	    series1.add(4.2, 6.0);*/
+	    
+	    data.addSeries(series1);
+	    
+	    XYDataset dataset = data;
+	    
+	    for(int i = 0; i < studentList.size(); i++)
+	    {
+	    	double idNum = Double.parseDouble(studentList.get(i).getID());
+	    	double minutes = Double.parseDouble(studentList.get(i).get()); // For attendance
+	    	series1.add(idNum, minutes);
+	    }
+		 
+	    JFreeChart chart = ChartFactory.createScatterPlot(chartTitle, xAxisLabel, yAxisLabel, dataset);
+		
+		JPanel chartPanel = new ChartPanel(chart);
 		//JFrame frame = new JFrame();
         this.add(chartPanel, BorderLayout.CENTER);
         this.setSize(1920, 1080);
@@ -29,39 +55,5 @@ public class Plot extends JFrame {
 	public void display(LinkedList<Student> studentList)
 	{
 		new Plot(studentList).setVisible(true);
-	}
-	
-	private JPanel giveGraphInformation(LinkedList<Student> studentList) {
-	    String chartTitle = "Attendance";
-	    String xAxisLabel = "ID Number";
-	    String yAxisLabel = "Minutes Attended";
-	 
-	    XYDataset dataset = giveData(studentList);
-	 
-	    JFreeChart chart = ChartFactory.createScatterPlot(chartTitle, xAxisLabel, yAxisLabel, dataset);
-	 
-	    return new ChartPanel(chart);
-	}
-	
-	private XYDataset giveData(LinkedList<Student> studentList) {
-		 XYSeriesCollection dataset = new XYSeriesCollection();
-		    XYSeries series1 = new XYSeries("Attendance 1");
-		 
-		    /*series1.add(1.0, 2.0);
-		    series1.add(2.0, 3.0);
-		    series1.add(3.0, 2.5);
-		    series1.add(3.5, 2.8);
-		    series1.add(4.2, 6.0);*/
-		    
-		    for(int i = 0; i < studentList.size(); i++)
-		    {
-		    	double idNum = Double.parseDouble(studentList.get(i).getID());
-		    	double minutes = Double.parseDouble(studentList.get(i).get()); // For attendance
-		    	series1.add(idNum, minutes);
-		    }
-		 
-		    dataset.addSeries(series1);
-		 
-		    return dataset;
 	}
 }
