@@ -1,4 +1,4 @@
-package stuff;
+
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
