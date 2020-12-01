@@ -5,6 +5,7 @@ public class save {
 	
 	private String filename;
 	private FileWriter fstream;
+	Add attendance = new Add();
 	Student student = new Student();
 	String id;
 	String min;
@@ -42,13 +43,13 @@ public class save {
 			 */
 			for(int i = 0; i < studentList.size(); i++)
 		    {
-				min = String.valueOf(studentList.get); //No attendance accessor set up
-				firstName = student.getFirst();
-				lastName = student.getLast();
-				program = student.getProg();
-				level = student.getLevel();
-				id = student.getID();
-				username = student.getASUrite();
+				min = String.valueOf(attendance); //No attendance accessor set up
+				firstName = studentList.get(i).getFirst();
+				lastName = studentList.get(i).getLast();
+				program = studentList.get(i).getProg();
+				level = studentList.get(i).getLevel();
+				id = studentList.get(i).getID();
+				username = studentList.get(i).getASUrite();
 				fstream.write(id); 
 				fstream.write(",");
 				fstream.write(firstName);
