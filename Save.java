@@ -14,6 +14,7 @@ public class save {
 	String lastName;
 	String username;
 	String level;
+	String date;
 	/**
 	 * This method prints the information into a csv file using the information given by the main class.
 	 * 
@@ -30,7 +31,7 @@ public class save {
 	 * @param username
 	 * @param minutes
 	 */
-	void writeFile(String namedFile, LinkedList<Student> studentList)
+	void writeFile(String namedFile, Student[] studentList)
 	{
 		
 		try
@@ -41,15 +42,16 @@ public class save {
 			/*
 			 *  idNum and minutes need to be converted to Strings first so I could write them out
 			 */
-			for(int i = 0; i < studentList.size(); i++)
+			for(int i = 0; i < studentList.length; i++)
 		    {
-				min = String.valueOf(attendance); //No attendance accessor set up
-				firstName = studentList.get(i).getFirst();
-				lastName = studentList.get(i).getLast();
-				program = studentList.get(i).getProg();
-				level = studentList.get(i).getLevel();
-				id = studentList.get(i).getID();
-				username = studentList.get(i).getASUrite();
+				date = studentList[i].attendance.attendanceDate;
+				min = String.valueOf(studentList[i].attendance.attendanceAmount); //No attendance accessor set up
+				firstName = studentList[i].getFirst();
+				lastName = studentList[i].getLast();
+				program = studentList[i].getProg();
+				level = studentList[i].getLevel();
+				id = studentList[i].getID();
+				username = studentList[i].getASUrite();
 				fstream.write(id); 
 				fstream.write(",");
 				fstream.write(firstName);
