@@ -267,7 +267,7 @@ public class date extends javax.swing.JFrame {
 		 }catch(IOException a) {
 			 System.out.println("AAAAAAAX2");
 		 }
-       System.exit(0);
+ //      System.exit(0);
     }                                        
 
    
