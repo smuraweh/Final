@@ -46,9 +46,10 @@ public class Plot extends JFrame {
 	    series1.add(4.2, 0.60);*/
 	    
 	    String date = null;
-	    LinkedList dates = new LinkedList();
+	    LinkedList<String> dates = new LinkedList();
 	    int numDates = 0;
 	    int totalDates = numColumns - 6;
+	    XYDataset dataset = data;
 	    
 	    for(int i = 0; i < numRows; i++)
 	    {
@@ -61,10 +62,8 @@ public class Plot extends JFrame {
 	    		series1.add(id, time);
 	    		numDates++;
 	    	}
-		    data.addSeries(series1);
+	    	data.addSeries(series1);
 	    }
-	    
-	    XYDataset dataset = data;
 		 
 	    JFreeChart chart = ChartFactory.createScatterPlot(chartTitle, xAxisLabel, yAxisLabel, dataset);
 		
@@ -74,7 +73,7 @@ public class Plot extends JFrame {
         Shape shape = new Rectangle(10, 10);
         for(int i = 0; i < totalDates; i++)
         {
-        	chartLegend.add(new LegendItem(date, null, null, null, shape, Color.blue));
+        	chartLegend.add(new LegendItem(dates.get(i), null, null, null, shape, Color.blue));
         }
         xyPlot.setFixedLegendItems(chartLegend);
         XYItemRenderer renderer = xyPlot.getRenderer();
