@@ -60,8 +60,8 @@ public class Plot extends JFrame {
 	    		dates.add(model.getColumnName(j));
 	    		series1.add(id, time);
 	    		numDates++;
-	    		data.addSeries(series1);
 	    	}
+		    data.addSeries(series1);
 	    }
 	    
 	    XYDataset dataset = data;
