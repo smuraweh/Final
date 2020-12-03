@@ -41,10 +41,12 @@ public class Plot extends JFrame {
 	    data.addSeries(series1);
 	    
 	    XYDataset dataset = data;
+	    String date = null;
 	    
 	    for(int i = 0; i < studentList.length; i++)
 	    {
 	    	double idNum = Double.parseDouble(studentList[i].getID());
+	    	date = studentList[i].attendance.attendanceDate;
 	    	double minutes = studentList[i].attendance.attendanceAmount; // For attendance
 	    	series1.add(idNum, minutes);
 	    }
@@ -55,7 +57,7 @@ public class Plot extends JFrame {
         xyPlot.setRangeCrosshairVisible(true);
         LegendItemCollection chartLegend = new LegendItemCollection();
         Shape shape = new Rectangle(10, 10);
-        chartLegend.add(new LegendItem("January 1", null, null, null, shape, Color.blue));
+        chartLegend.add(new LegendItem(date, null, null, null, shape, Color.blue));
         xyPlot.setFixedLegendItems(chartLegend);
         XYItemRenderer renderer = xyPlot.getRenderer();
         renderer.setSeriesPaint(0, Color.blue);
