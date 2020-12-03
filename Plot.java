@@ -86,6 +86,6 @@ public class Plot extends JFrame {
 	
 	public void display(JTable table)
 	{
-		new Plot(studentList).setVisible(true);
+		new Plot(table).setVisible(true);
 	}
 }
