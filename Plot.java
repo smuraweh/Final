@@ -2,6 +2,8 @@ import java.awt.*;
 import java.util.LinkedList;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
 import org.jfree.chart.ChartPanel;
@@ -23,8 +25,13 @@ public class Plot extends JFrame {
 	Student student = new Student();
 	//Add attendance = new Add();
 	
-	public Plot(Student[] studentList)
+	public Plot(JTable table)
 	{	
+		DefaultTableModel model = (DefaultTableModel)table.getModel();
+		int numColumns = model.getColumnCount();
+		int numRows = model.getRowCount();
+		
+		
 		String chartTitle = "Attendance";
 	    String xAxisLabel = "ID Number";
 	    String yAxisLabel = "Minutes Attended";
@@ -43,12 +50,15 @@ public class Plot extends JFrame {
 	    XYDataset dataset = data;
 	    String date = null;
 	    
-	    for(int i = 0; i < studentList.length; i++)
+	    for(int i = 0; i < numRows; i++)
 	    {
-	    	double idNum = Double.parseDouble(studentList[i].getID());
-	    	date = studentList[i].attendance.attendanceDate;
-	    	double minutes = studentList[i].attendance.attendanceAmount; // For attendance
-	    	series1.add(idNum, minutes);
+	    	for(int j = 6; j < numColumns; j++)
+	    	{
+	    		double id = (double) model.getValueAt(i, 1);
+	    		double info = (double) model.getValueAt(i, j);
+	    		date = model.getColumnName(j);
+	    		series1.add(id, info);
+	    	}
 	    }
 		 
 	    JFreeChart chart = ChartFactory.createScatterPlot(chartTitle, xAxisLabel, yAxisLabel, dataset);
@@ -74,7 +84,7 @@ public class Plot extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
-	public void display(Student[] studentList)
+	public void display(JTable table)
 	{
 		new Plot(studentList).setVisible(true);
 	}
