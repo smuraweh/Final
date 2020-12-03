@@ -6,6 +6,8 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.LegendItem;
+import org.jfree.chart.LegendItemCollection;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.axis.NumberTickUnit;
 import org.jfree.chart.axis.ValueAxis;
@@ -51,6 +53,10 @@ public class Plot extends JFrame {
 		
 		XYPlot xyPlot = (XYPlot) chart.getPlot();
         xyPlot.setRangeCrosshairVisible(true);
+        LegendItemCollection chartLegend = new LegendItemCollection();
+        Shape shape = new Rectangle(10, 10);
+        chartLegend.add(new LegendItem("January 1", null, null, null, shape, Color.blue));
+        xyPlot.setFixedLegendItems(chartLegend);
         XYItemRenderer renderer = xyPlot.getRenderer();
         renderer.setSeriesPaint(0, Color.blue);
         NumberAxis domain = (NumberAxis) xyPlot.getDomainAxis();
