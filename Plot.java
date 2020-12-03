@@ -45,21 +45,26 @@ public class Plot extends JFrame {
 	    series1.add(3.5, 0.35);
 	    series1.add(4.2, 0.60);*/
 	    
-	    data.addSeries(series1);
-	    
-	    XYDataset dataset = data;
 	    String date = null;
+	    LinkedList dates = new LinkedList();
+	    int numDates = 0;
+	    int totalDates = numColumns - 6;
 	    
 	    for(int i = 0; i < numRows; i++)
 	    {
 	    	for(int j = 6; j < numColumns; j++)
 	    	{
 	    		double id = (double) model.getValueAt(i, 1);
-	    		double info = (double) model.getValueAt(i, j);
-	    		date = model.getColumnName(j);
-	    		series1.add(id, info);
+	    		double time = (double) model.getValueAt(i, j);
+	    		time = time / 75 * 100;
+	    		dates.add(model.getColumnName(j));
+	    		series1.add(id, time);
+	    		numDates++;
+	    		data.addSeries(series1);
 	    	}
 	    }
+	    
+	    XYDataset dataset = data;
 		 
 	    JFreeChart chart = ChartFactory.createScatterPlot(chartTitle, xAxisLabel, yAxisLabel, dataset);
 		
@@ -67,14 +72,17 @@ public class Plot extends JFrame {
         xyPlot.setRangeCrosshairVisible(true);
         LegendItemCollection chartLegend = new LegendItemCollection();
         Shape shape = new Rectangle(10, 10);
-        chartLegend.add(new LegendItem(date, null, null, null, shape, Color.blue));
+        for(int i = 0; i < totalDates; i++)
+        {
+        	chartLegend.add(new LegendItem(date, null, null, null, shape, Color.blue));
+        }
         xyPlot.setFixedLegendItems(chartLegend);
         XYItemRenderer renderer = xyPlot.getRenderer();
         renderer.setSeriesPaint(0, Color.blue);
         NumberAxis domain = (NumberAxis) xyPlot.getDomainAxis();
         NumberAxis range = (NumberAxis) xyPlot.getRangeAxis();
-        range.setRange(0.0, 1.0);
-        range.setTickUnit(new NumberTickUnit(0.05));
+        range.setRange(0, 100);
+        range.setTickUnit(new NumberTickUnit(5));
         
         JPanel chartPanel = new ChartPanel(chart);
         
